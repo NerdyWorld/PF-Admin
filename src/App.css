@@ -1,0 +1,233 @@
+*{
+  margin: 0;
+}
+
+
+@font-face {
+  font-family: "Gucci";
+  src: local("Gucci"),
+  url("./fonts/gucci.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Dolce";
+  src: local("Dolce"),
+  url("./fonts/FuturaStd-Medium.woff2") format("woff2");
+}
+
+
+@font-face {
+  font-family: "FOG";
+  src: local("FOG"),
+  url("./fonts/HelveticaNeueLTPro-Cn.woff2") format("woff2");
+}
+
+.mainTitle{
+  font-family: FOG;
+  letter-spacing: 4px;
+  font-size: 16px;
+  margin: 0;
+  padding: 0.7rem 0rem;
+}
+
+.userData{
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.userDropdown a{
+  font-size: 11px !important;
+  letter-spacing: 1px;
+}
+
+
+.ant-table-tbody tr td{
+  cursor: default;
+}
+.ant-table-thead tr th{
+  cursor: default;
+  background-color: #1f1f1f !important;
+  color: white !important;
+}
+
+.ant-table-column-sorter{
+  color: whitesmoke !important;
+}
+
+
+
+
+.userDelete, .userBan, .userActivate, .userWishlist, .userCart{
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+
+
+.userDelete:hover, .userBan:hover, .userActivate:hover, .userWishlist:hover, .userCart:hover{
+  transform: scale(1.06);
+}
+
+
+.ant-table-filter-trigger{
+  color: white !important;
+}
+.userStatusSpan{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.userStatusSpan span.online{
+  width: 8px !important;
+  height: 8px !important;
+  background-color: green !important;
+  border-radius: 50% !important;
+}
+
+.userStatusSpan span.offline{
+  width: 8px !important;
+  height: 8px !important;
+  background-color: rgb(201, 54, 54) !important;
+  border-radius: 50% !important;
+}
+
+.ant-table-wrapper td.ant-table-column-sort{
+  background: white;
+}
+
+
+.userInfo{
+  transition: transform 0.4s ease;
+}
+
+.userInfo:hover{
+  transform: scale(1.05);
+}
+
+.userDetails .ant-pagination{
+  display: none;
+}
+
+
+
+/* SWEET ALERT CUSTOM TOAST */
+
+.swalTitle{
+  color: white;
+  font-family: Gucci;
+  letter-spacing: 0.5px;
+  cursor: default;
+}
+
+.swalHtml{
+  font-family: Gucci;
+  line-height: 30px !important;
+  cursor: default;
+}
+
+
+.swalHtml b{
+  text-decoration: underline;
+}
+
+
+.confirmSwalCheckout{
+  background-color: rgb(215, 76, 76);
+  color: white;
+  border: none;
+  font-family: Gucci;
+  padding: 0.3rem 1rem;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-right: 1rem;
+}
+
+
+.denySwalCheckout{
+  background-color: whitesmoke;
+  border: none;
+  font-family: Gucci;
+  padding: 0.3rem 1rem;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+
+/* PROD COLOR MODAL */
+
+
+
+.carousel-control-prev{
+  height: 20% !important;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.carousel-control-next{
+  height: 20% !important;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-next-icon{
+  background-image: url("https://nerdy-my-ecommerce.s3.us-east-2.amazonaws.com/FrontAssets/Nacho/rightArrow") !important;
+}
+
+.carousel-control-prev-icon{
+  background-image: url("https://nerdy-my-ecommerce.s3.us-east-2.amazonaws.com/FrontAssets/Nacho/left-svgrepo-com.png") !important;
+}
+
+
+.prodColorModal .carousel-item{
+  max-height: 352px !important;
+}
+
+.prodColorModal .carousel-item.dolce{
+  max-height: 380px !important;
+}
+
+
+
+
+.form-select,
+.form-control{
+  box-shadow: none !important;
+  border: 1px solid lightgray !important;
+  font-size: 13px !important;
+  letter-spacing: 1px;
+}
+
+
+summary{
+  font-family: Gucci;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+
+
+/* PRIME REACT TOAST */
+.p-toast-message{
+  background-color: rgb(0, 0, 0, 0.50) !important;
+  color: white !important;
+  font-family: Gucci;
+  border-left: 6px solid #ffffff4e !important;
+}
+
+.p-toast-icon-close{
+  background-color: rgba(0, 0, 0, 0.251) !important;
+  color: white !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.p-toast-icon-close svg{
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.p-toast-message.p-toast-message-success .p-toast-message-icon{
+  width: 20px !important;
+  color: rgb(219, 219, 219) !important;
+}

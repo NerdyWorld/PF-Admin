@@ -1,0 +1,87 @@
+.article{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 100vh;
+  z-index: 998;
+  background-color: rgb(0, 0, 0, 0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div{
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.788);
+  width: 800px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.left{
+  background-color: white;
+  padding: 1rem;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.right{
+  background-color: white;
+  padding: 1rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  position: relative;
+  cursor: default;
+}
+
+.right h4{
+  margin-top: 2rem;
+  letter-spacing: 1.5px;
+}
+
+.right span.brand{
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.right p{
+  margin-top: 1.5rem;
+  line-height: 25px;
+  margin-bottom: 3rem;
+}
+
+.right .stocks{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.right .stocks span:first-child{
+  margin-right: 2rem;
+  background-color: #1f1f1ff0;
+  color: white;
+  padding: 0.4rem 0.7rem;
+  letter-spacing: 1px;
+  border-radius: 0.1rem;
+  font-size: 12.5px;
+}
+
+.right .stocks span:last-child{
+  background-color: #1f1f1ff0;
+  color: white;
+  padding: 0.4rem 0.7rem;
+  letter-spacing: 1px;
+  border-radius: 0.1rem;
+  font-size: 12.5px;
+}
