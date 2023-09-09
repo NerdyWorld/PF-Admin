@@ -6,6 +6,9 @@ import Users from './Views/Users/Users';
 import SingleUser from './Views/SingleUser/SingleUser';
 import ProductList from './Views/ProductList/ProductList';
 import AddProduct from './Views/AddProduct/addProduct';
+import CategoriesList from './Views/Categories/Categories List/CategoriesList';
+import ColorsList from './Views/Colors/ColorsList/ColorsList';
+import BrandsList from './Views/Brands/BrandsList/BrandsList';
 
 
 const Router = () => {
@@ -20,6 +23,9 @@ const Router = () => {
           <Route index element={<Users/>}/>
           <Route exact path="user/:id" element={<SingleUser/>}/>
           <Route exact path="productList" element={<ProductList/>}/>
+          <Route exact path="categoriesList" element={<CategoriesList/>}/>
+          <Route exact path="colorsList" element={<ColorsList/>}/>
+          <Route exact path="brandsList" element={<BrandsList/>}/>
           <Route exact path="addProduct" element={<AddProduct/>}/>
         </Route>
       </Routes>
