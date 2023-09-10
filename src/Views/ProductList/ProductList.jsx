@@ -1,32 +1,33 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./ProductList.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { FcFullTrash, FcCancel, FcApproval, FcInfo } from "react-icons/fc"
-import { TailSpin } from 'react-loader-spinner';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { FcFullTrash, FcCancel, FcApproval, FcInfo } from "react-icons/fc";
+import { TailSpin } from "react-loader-spinner";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import uniqId from "uniqid";
 import { Table, Button, Input, Space } from "antd";
-import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
-import { GlobalContext } from '../../Context/globalContext';
-import ProdColorImg from '../../Modals/productColorImages/prodColorImg';
-import { deleteProduct, getAllProducts } from '../../Features/Products/productSlice';
-
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
+import { GlobalContext } from "../../Context/globalContext";
+import ProdColorImg from "../../Modals/productColorImages/prodColorImg";
+import {
+  deleteProduct,
+  getAllProducts,
+} from "../../Features/Products/productSlice";
 
 const ProductList = () => {
-
   // CONTEXT API
   const globalContext = useContext(GlobalContext);
   const { setShowColorModal } = globalContext;
 
-  const state = useSelector(state => state);
+  const state = useSelector((state) => state);
   const { products, message } = state.products;
   const dispatch = useDispatch();
 
   // SEARCH FUNCTIONALITY
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -35,10 +36,16 @@ const ProductList = () => {
   };
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText('');
+    setSearchText("");
   };
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+      close,
+    }) => (
       <div
         style={{
           padding: 8,
@@ -49,11 +56,13 @@ const ProductList = () => {
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
             marginBottom: 8,
-            display: 'block',
+            display: "block",
           }}
         />
         <Space>
@@ -105,7 +114,7 @@ const ProductList = () => {
     filterIcon: (filtered) => (
       <SearchOutlined
         style={{
-          color: filtered ? '#1677ff' : undefined,
+          color: filtered ? "#1677ff" : undefined,
         }}
       />
     ),
@@ -120,54 +129,53 @@ const ProductList = () => {
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
-            backgroundColor: '#ffc069',
+            backgroundColor: "#ffc069",
             padding: 0,
           }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
         text
       ),
   });
 
-
-  const handleDelete = (productId) =>{
+  const handleDelete = (productId) => {
     Swal.fire({
       color: "whitesmoke",
       icon: "warning",
-      iconColor:"white",
-      background:"#1f1f1f",
-      buttonsStyling:false,
+      iconColor: "white",
+      background: "#1f1f1f",
+      buttonsStyling: false,
       title: `<p>Wow wow!</p>`,
-      html:`
+      html: `
       <p>
         Are you sure you want to delete this product?
       </p>
       `,
       showConfirmButton: true,
       confirmButtonText: "Yes",
-      confirmButtonColor:"#1f1f1f",
+      confirmButtonColor: "#1f1f1f",
       showDenyButton: true,
-      denyButtonText:"No",
-      denyButtonColor:"grey",
-      denyButtonAriaLabel:"black",      
+      denyButtonText: "No",
+      denyButtonColor: "grey",
+      denyButtonAriaLabel: "black",
       toast: true,
       customClass: {
         confirmButton: "confirmSwalCheckout",
         denyButton: "denySwalCheckout",
         title: "swalTitle",
-        htmlContainer: "swalHtml"
-      }
-    }).then(result => {
-      if(result.isConfirmed){
-        dispatch(deleteProduct({productId}));
-      }else if(result.isDenied){
+        htmlContainer: "swalHtml",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProduct({ productId }));
+      } else if (result.isDenied) {
         return;
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -175,126 +183,128 @@ const ProductList = () => {
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: "Name",
+      dataIndex: "name",
       key: "name",
       defaultSortOrder: "ascend",
-      sorter: (a, b)=>{
-        if(a.name < b.name){
+      sorter: (a, b) => {
+        if (a.name < b.name) {
           return -1;
         }
-        if(a.name > b.name){
+        if (a.name > b.name) {
           return 1;
         }
-        return 0
+        return 0;
       },
-      ...getColumnSearchProps('name')
+      ...getColumnSearchProps("name"),
     },
     {
-      title: 'Brand',
-      dataIndex: 'brand',
+      title: "Brand",
+      dataIndex: "brand",
       key: "brand",
       defaultSortOrder: "ascend",
-      sorter: (a, b)=>{
-        if(a.brand < b.brand){
+      sorter: (a, b) => {
+        if (a.brand < b.brand) {
           return -1;
         }
-        if(a.brand > b.brand){
+        if (a.brand > b.brand) {
           return 1;
         }
-        return 0
+        return 0;
       },
-      ...getColumnSearchProps('brand')
+      ...getColumnSearchProps("brand"),
     },
     {
-      title: 'Stock',
-      dataIndex: 'stock',
+      title: "Stock",
+      dataIndex: "stock",
       key: "stock",
     },
     {
-      title: 'Price',
-      dataIndex: 'price',
+      title: "Price",
+      dataIndex: "price",
       key: "price",
     },
     {
-      title: 'SKU',
-      dataIndex: 'sku',
+      title: "SKU",
+      dataIndex: "sku",
       key: "sku",
       defaultSortOrder: "ascend",
-      sorter: (a, b)=>{
-        if(a.sku < b.sku){
+      sorter: (a, b) => {
+        if (a.sku < b.sku) {
           return -1;
         }
-        if(a.sku > b.sku){
+        if (a.sku > b.sku) {
           return 1;
         }
-        return 0
+        return 0;
       },
-      ...getColumnSearchProps('sku')
+      ...getColumnSearchProps("sku"),
     },
     {
-      title: 'Category',
-      dataIndex: 'category',
+      title: "Category",
+      dataIndex: "category",
       key: "category",
       defaultSortOrder: "ascend",
-      sorter: (a, b)=>{
-        if(a.category < b.category){
+      sorter: (a, b) => {
+        if (a.category < b.category) {
           return -1;
         }
-        if(a.category > b.category){
+        if (a.category > b.category) {
           return 1;
         }
-        return 0
+        return 0;
       },
-      ...getColumnSearchProps('category')
+      ...getColumnSearchProps("category"),
     },
     {
-      title: 'Genre',
-      dataIndex: 'genre',
+      title: "Genre",
+      dataIndex: "genre",
       key: "genre",
       defaultSortOrder: "ascend",
-      sorter: (a, b)=>{
-        if(a.genre < b.genre){
+      sorter: (a, b) => {
+        if (a.genre < b.genre) {
           return -1;
         }
-        if(a.genre > b.genre){
+        if (a.genre > b.genre) {
           return 1;
         }
-        return 0
-      }
+        return 0;
+      },
     },
     {
-      title: 'Colors',
-      dataIndex: 'colors',
+      title: "Colors",
+      dataIndex: "colors",
       key: "colors",
     },
     {
-      title: 'Actions',
-      dataIndex: 'actions',
+      title: "Actions",
+      dataIndex: "actions",
       key: "actions",
-    }
+    },
   ];
 
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
-    if(products.length){
+    if (products.length) {
       let newDataSource = [];
 
-      for(let i = 0; i < products.length; i++){
+      for (let i = 0; i < products.length; i++) {
         // Save global variable
         const el = products[i];
-    
+
         // Colors Stock Sum
         let totalStock = 0;
-        el.stock.map(item => totalStock += item.stock);
-    
+        el.stock.map((item) => (totalStock += item.stock));
+
         // Sizes
         let sizes = "";
-        el.sizes.map(size => sizes += `${size} • `);
-    
+        el.sizes.map((size) => (sizes += `${size} • `));
+
         // Genre
-        const findGenre = el.categories.find(el => el === "Women" || el === "Man");
-        
+        const findGenre = el.categories.find(
+          (el) => el === "Women" || el === "Man"
+        );
+
         newDataSource.push({
           name: el.name.trim(),
           brand: el.brand,
@@ -304,19 +314,45 @@ const ProductList = () => {
           category: el.categories[0],
           sizes,
           sku: el.SKU,
-          colors: <div className='d-flex align-items-center gap-2 flex-wrap'>
-            {
-              el.images.map(item => <span className={styles.colorSpan} style={{backgroundColor: item.color, cursor: "pointer", border: item.color.toLowerCase() === "white" ? "1px solid lightgrey" : "none"}} data-images={item.images} data-color={item.color} data-stock={JSON.stringify(el.stock)} data-info={JSON.stringify({name: el.name, brand: el.brand, description: el.description})} onClick={(e)=> setShowColorModal({
-                images: e.target.dataset.images,
-                color: e.target.dataset.color,
-                stock: e.target.dataset.stock,
-                info: e.target.dataset.info
-              })}></span>)
-            }
-          </div>,
-          actions: <div style={{cursor: "pointer"}} onClick={()=> handleDelete(el.id)}>
-            {
-              message === `Deleting product ${el.id}` ? (
+          colors: (
+            <div className="d-flex align-items-center gap-2 flex-wrap">
+              {el.images.map((item) => (
+                <span
+                  className={styles.colorSpan}
+                  style={{
+                    backgroundColor: item.color,
+                    cursor: "pointer",
+                    border:
+                      item.color.toLowerCase() === "white"
+                        ? "1px solid lightgrey"
+                        : "none",
+                  }}
+                  data-images={item.images}
+                  data-color={item.color}
+                  data-stock={JSON.stringify(el.stock)}
+                  data-info={JSON.stringify({
+                    name: el.name,
+                    brand: el.brand,
+                    description: el.description,
+                  })}
+                  onClick={(e) =>
+                    setShowColorModal({
+                      images: e.target.dataset.images,
+                      color: e.target.dataset.color,
+                      stock: e.target.dataset.stock,
+                      info: e.target.dataset.info,
+                    })
+                  }
+                ></span>
+              ))}
+            </div>
+          ),
+          actions: (
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => handleDelete(el.id)}
+            >
+              {message === `Deleting product ${el.id}` ? (
                 <TailSpin
                   height="20"
                   width="20"
@@ -326,28 +362,28 @@ const ProductList = () => {
                   wrapperStyle={{}}
                   wrapperClass=""
                   visible={true}
-                />  
-              ):(
-                <div className='d-flex align-items-center gap-3'>
-                  <FcFullTrash size={19}/>
+                />
+              ) : (
+                <div className="d-flex align-items-center gap-3">
+                  <FcFullTrash size={19} />
                 </div>
-              )
-            }
-          </div>
-        })
-      };
+              )}
+            </div>
+          ),
+        });
+      }
 
       setDataSource(newDataSource);
     }
   }, [products, message]);
 
-  return ( 
+  return (
     <div className={styles.wrapper}>
-       <ProdColorImg/>
-       <h3>Products List</h3>
-       <Table dataSource={dataSource} columns={columns} />
+      <ProdColorImg />
+      <h3>Products List</h3>
+      <Table dataSource={dataSource} columns={columns} />
     </div>
-   );
-}
- 
+  );
+};
+
 export default ProductList;
