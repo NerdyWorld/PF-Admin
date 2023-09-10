@@ -1,4 +1,3 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { categoriesService } from "./CategoriesService";
 
@@ -10,8 +9,16 @@ const initialState = {
   isLoading: false
 };
 
-
-// Esta funcion llama a la funcion que creaste en el service, cla, es para generar capas. Esta funcion la llamas con un dispatch si.
+export const createNewCategory = createAsyncThunk(
+  "create-new-category",
+  async (category, thunkAPI) => {
+    try {
+      return await categoriesService.createCategory(category);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const getAllCategories = createAsyncThunk("get-all-categories", async(thunkAPI)=>{
   try{
@@ -61,31 +68,50 @@ export const categoriesSlice = createSlice({
             state.message = "Get Categories error";
             state.categories = []
           })
-
-
           // DELETE CATEGORY
           .addCase(deleteCategory.pending, (state, action)=>{
             state.isLoading = true;
-            state.message = `Deleting ${action.payload.arg.meta.categoryId}`
-
+            console.log(action.payload)
           })
-          .addCase(deleteCategory.fulfilled, (state, action)=>{
-            // Cuando se realiza con exito la peticion
+          .addCase(deleteCategory.fulfilled, (state, action) => {
+            // Cuando se realiza con éxito la petición
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false;
             state.message = "Delete category success";
-            state.categories = state.categories.filter(category => category.id !== action.payload.data)
-            // El back devuelve el id de la categoria en el payload.data
+            
+            // Filtrar las categorías según el ID eliminado
+            state.categories = state.categories.filter(category => category.id !== action.payload.data);
           })
+          
           .addCase(deleteCategory.rejected, (state, action)=>{
             // Cuando se realiza con exito la peticion
+            console.log(action.error)
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = true;
-            state.message = "Delete category error";
-            state.categories = []
+            state.message = `Delete category error: ${action.error.message}`
           })
+
+
+          // CREATE NEW CATEGORY
+          .addCase(createNewCategory.pending, (state) => {
+            state.isLoading = true;
+            state.message = "Creating Category";
+          })
+          .addCase(createNewCategory.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isError = false;
+            state.message = "Create Category Success";
+            state.categories.push(action.payload.data); // Agregar la nueva categoría al estado
+          })
+          .addCase(createNewCategory.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isError = true;
+            state.message = "Create Category Error";
+      });
 
   }
 })
