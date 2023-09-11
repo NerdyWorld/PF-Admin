@@ -9,20 +9,30 @@ const getAllCategories = async() =>{
 
 
 const deleteCategory = async(categoryId) =>{
-  const response = await axios.delete(`http://localhost:3001/api/categories/${categoryId}`);
-  
-  return response.data
+  try {
+    const response = await axios.delete(`http://localhost:3001/api/categories/delete/${categoryId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al hacer la petición DELETE:", error);
+    throw error;
+  }
 };
 
+const createCategory = async (category) => {
+  try {
+    const response = await axios.post("http://localhost:3001/api/categories/create", category);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error; // Re-lanza el error para que pueda ser manejado en otro lugar si es necesario
+  }
+};
 
-// Yes, dejame que levanto el server a ver si no rompe nada
 
 
 export const categoriesService = {
   getAllCategories,
-  deleteCategory
+  deleteCategory,
+  createCategory
 };
 
-
-// Claro aca van los services y los slices, estamos usando toolkit
-// Ahora lo hacemos

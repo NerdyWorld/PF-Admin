@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Table } from "antd";
-import { FcFullTrash, FcApproval } from "react-icons/fc";
+import { FcFullTrash } from "react-icons/fc";
 import styles from "./ColorsList.module.css";
 import { Input, Button, Space } from "antd";
 import Highlighter from "react-highlight-words";
