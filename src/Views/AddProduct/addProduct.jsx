@@ -8,6 +8,8 @@ import { Toast } from "primereact/toast";
 import { createProduct } from "../../Features/Products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { TailSpin } from "react-loader-spinner";
+
 const initialState = {
   name: "",
   brand: "",
@@ -19,6 +21,8 @@ const initialState = {
   genre: "",
   price: null,
   SKU: "",
+  images: [],
+  stock: [],
 };
 
 const initialStateColor1 = {
@@ -32,6 +36,7 @@ const initialStateColor1 = {
 };
 const initialStateColor2 = {
   color: "",
+  stock: 0,
   image1: "",
   image2: "",
   image3: "",
@@ -40,6 +45,7 @@ const initialStateColor2 = {
 };
 const initialStateColor3 = {
   color: "",
+  stock: 0,
   image1: "",
   image2: "",
   image3: "",
@@ -51,14 +57,13 @@ const AddProduct = () => {
   const refToast = useRef();
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const { message } = state.products;
+  const { message, isLoading } = state.products;
   const [newProduct, setNewProduct] = useState(initialState);
   const [color1, setColor1] = useState(initialStateColor1);
-  const [finalColor1, setFinalColor1] = useState(null);
+
   const [color2, setColor2] = useState(initialStateColor2);
-  const [finalColor2, setFinalColor2] = useState(null);
+
   const [color3, setColor3] = useState(initialStateColor3);
-  const [finalColor3, setFinalColor3] = useState(null);
 
   const [useColor2, setUseColor2] = useState(false);
   const [useColor3, setUseColor3] = useState(false);
@@ -151,14 +156,41 @@ const AddProduct = () => {
       });
     }
 
+    let colors = [];
+    if (color1.color) {
+      colors.push(color1.color);
+    }
     if (useColor2) {
-      if (
-        !color2.color ||
-        !color2.image1 ||
-        !color2.image2 ||
-        !color2.image3 ||
-        !color2.stock
-      ) {
+      colors.push(color2.color);
+    }
+    if (useColor3) {
+      colors.push(color3.color);
+    }
+    console.log(colors);
+
+    // COLOR 1 VALIDATION
+
+    const images = [
+      {
+        color: color1.color,
+        images: [color1.image1, color1.image2, color1.image3],
+      },
+    ];
+    if (color1.image4.length) {
+      images[0].images.push(color1.image4);
+    }
+    if (color1.image5.length && color1.image4.length) {
+      images[0].images.push(color1.image5);
+    } else if (color1.image5.length) {
+      return refToast.current.show({
+        life: 3000,
+        severity: "warn",
+        summary: "Wait!",
+        detail: "Color 4 field incomplete",
+      });
+    }
+    if (useColor2) {
+      if (!color2.color || !color2.image1 || !color2.image2 || !color2.image3) {
         return refToast.current.show({
           life: 3000,
           severity: "warn",
@@ -166,44 +198,27 @@ const AddProduct = () => {
           detail: "Color 2 fields incomplete",
         });
       } else {
-        setFinalColor2({
+        images.push({
           color: color2.color,
           images: [color2.image1, color2.image2, color2.image3],
         });
-
-        if (color2.image4.length) {
-          setFinalColor2({
-            ...finalColor2,
-            images: [...finalColor2.images, color2.image4],
-          });
-        }
-        if (color2.image5.length) {
-          if (!color2.image4.length) {
-            // Alert
-            refToast.current.show({
-              life: 3000,
-              severity: "warn",
-              summary: "Wait!",
-              detail: "Image 4 Field is empty at Color 2",
-            });
-          } else {
-            setFinalColor2({
-              ...finalColor2,
-              images: [...finalColor2.images, color2.image5],
-            });
-          }
-        }
+      }
+      if (color2.image4.length) {
+        images[1].images.push(color2.image4);
+      }
+      if (color2.image5.length && color2.image4.length) {
+        images[1].images.push(color2.image5);
+      } else if (color1.image5.length) {
+        return refToast.current.show({
+          life: 3000,
+          severity: "warn",
+          summary: "Wait!",
+          detail: "Color 4 field incomplete",
+        });
       }
     }
-
     if (useColor3) {
-      if (
-        !color3.color ||
-        !color3.image1 ||
-        !color3.image2 ||
-        !color3.image3 ||
-        !color3.stock
-      ) {
+      if (!color3.color || !color3.image1 || !color3.image2 || !color3.image3) {
         return refToast.current.show({
           life: 3000,
           severity: "warn",
@@ -211,121 +226,105 @@ const AddProduct = () => {
           detail: "Color 3 fields incomplete",
         });
       } else {
-        setFinalColor3({
+        images.push({
           color: color3.color,
           images: [color3.image1, color3.image2, color3.image3],
         });
-
-        if (color3.image4.length) {
-          setFinalColor3({
-            ...finalColor3,
-            images: [...finalColor3.images, color3.image4],
-          });
-        }
-        if (color3.image5.length) {
-          if (!color3.image4.length) {
-            // Alert
-            refToast.current.show({
-              life: 3000,
-              severity: "warn",
-              summary: "Wait!",
-              detail: "Image 4 Field is empty at Color 2",
-            });
-          } else {
-            setFinalColor3({
-              ...finalColor3,
-              images: [...finalColor3.images, color3.image5],
-            });
-          }
-        }
       }
-    }
-
-    let colors = [];
-    if (color1.color) {
-      colors.push(color1.color);
-    } else if (color2.color) {
-      colors.push(color2.color);
-    } else if (color3.color) {
-      colors.push(color3.color);
-    }
-
-    // COLOR 1 VALIDATION
-    setFinalColor1({
-      color: color1.color,
-      images: [color1.image1, color2.image2, color3.image3],
-    });
-
-    if (color1.image4.length) {
-      setFinalColor1({
-        ...finalColor1,
-        images: [...finalColor1.images, color1.image4],
-      });
-    }
-    if (color1.image5.length) {
-      if (!color1.image4.length) {
-        // Alert
-        refToast.current.show({
+      if (color3.image4.length) {
+        images[2].images.push(color3.image4);
+      }
+      if (color3.image5.length && color3.image4.length) {
+        images[2].images.push(color3.image5);
+      } else if (color1.image5.length) {
+        return refToast.current.show({
           life: 3000,
           severity: "warn",
           summary: "Wait!",
-          detail: "Image 4 Field is empty",
-        });
-      } else {
-        setFinalColor1({
-          ...finalColor1,
-          images: [...finalColor1.images, color1.image5],
+          detail: "Color 4 field incomplete",
         });
       }
     }
 
+    const stock = [
+      {
+        color: color1.color,
+        stock: color1.stock,
+        sold: 0,
+      },
+    ];
+
+    if (useColor2 && color2.color) {
+      stock.push({
+        color: color2.color,
+        stock: color2.stock,
+        sold: 0,
+      });
+    }
+
+    if (useColor3 && color3.color) {
+      stock.push({
+        color: color3.color,
+        stock: color3.stock,
+        sold: 0,
+      });
+    }
+
+    // Filtrar objetos nulos o falsos en stock
+    const filteredStock = stock.filter(
+      (item) => item !== null && item !== false
+    );
+
+    const filteredImages = images.filter(
+      (item) => item !== null && item !== false
+    );
     const finalNewProduct = {
       name: newProduct.name,
       brand: newProduct.brand,
       price: newProduct.price,
       description: newProduct.description,
-      // specifications: newProduct.specifications,
+      specifications: newProduct.specifications,
       categories: [newProduct.category, newProduct.genre],
-      sizes: newProduct.sizes,
+      sizes: [newProduct.sizes],
       SKU: newProduct.SKU,
     };
+
+    // Filtrar imágenes nulas o falsas
+    const filteredColors = colors.filter(
+      (item) => item !== null && item !== false
+    );
 
     dispatch(
       createProduct({
         ...finalNewProduct,
-        colors: colors,
-        stock: [
-          {
-            color: color1.color,
-            stock: color1.stock,
-            sold: 0,
-          },
-          useColor2 && {
-            color: color2.color,
-            stock: color2.stock,
-            sold: 0,
-          },
-          useColor3 && {
-            color: color3.color,
-            stock: color3.stock,
-            sold: 0,
-          },
-        ],
-        images: [
-          finalColor1,
-          useColor2 && finalColor2,
-          useColor3 && finalColor3,
-        ],
+        colors: filteredColors,
+        stock: filteredStock,
+        images: filteredImages,
       })
     );
   };
 
   useEffect(() => {
+    if (message === "Creating Product Success") {
+      refToast.current.show({
+        life: 3000,
+        severity: "success",
+        summary: "Success",
+        detail: message,
+      });
+    } else if (message === "Creating Product Error") {
+      refToast.current.show({
+        life: 3000,
+        severity: "error",
+        summary: "Error",
+        detail: "Product name already exist",
+      });
+    }
     setNewProduct({
       ...newProduct,
       SKU: uniqId(),
     });
-  }, []);
+  }, [isLoading, message]);
 
   return (
     <div className={styles.wrapper}>
@@ -451,7 +450,6 @@ const AddProduct = () => {
             />
             <label htmlFor="specifications">Sku</label>
           </div>
-
           {/* Color 1 */}
           <details className="w-100 mt-5">
             <summary>Color 1</summary>
@@ -542,7 +540,6 @@ const AddProduct = () => {
               </div>
             </div>
           </details>
-
           {/* Color 2 */}
           <details className="w-100 mt-3">
             <summary>
@@ -572,6 +569,17 @@ const AddProduct = () => {
                   value={color2.color}
                 />
                 <label htmlFor="specifications">Color B</label>
+              </div>
+              <div className="form-floating mb-1 w-100 p-1 mt-2">
+                <input
+                  type="text"
+                  id="specifications"
+                  className="form-control"
+                  name="stock"
+                  onChange={handleColor2}
+                  value={color2.stock}
+                />
+                <label htmlFor="specifications">Stock</label>
               </div>
               <div className="form-floating mb-1 flex-grow-1 p-1">
                 <input
@@ -634,7 +642,6 @@ const AddProduct = () => {
               </div>
             </div>
           </details>
-
           {/* Color 3 */}
           <details className="w-100 mt-3">
             <summary>
@@ -664,6 +671,17 @@ const AddProduct = () => {
                   value={color3.color}
                 />
                 <label htmlFor="specifications">Color C</label>
+              </div>
+              <div className="form-floating mb-1 w-100 p-1 mt-2">
+                <input
+                  type="text"
+                  id="specifications"
+                  className="form-control"
+                  name="stock"
+                  onChange={handleColor3}
+                  value={color3.stock}
+                />
+                <label htmlFor="specifications">Stock</label>
               </div>
               <div className="form-floating mb-1 flex-grow-1 p-1">
                 <input
@@ -726,10 +744,26 @@ const AddProduct = () => {
               </div>
             </div>
           </details>
-
-          <div className={styles.createBtn} onClick={handleCreate}>
-            <button>Create</button>
-          </div>
+          {isLoading ? (
+            <TailSpin
+              height="20"
+              width="20"
+              color="#4fa94d"
+              ariaLabel="tail-spin-loading"
+              radius="1"
+              className={`mx-auto mt-4`}
+              wrapperStyle={{
+                margin: "auto", // Centra horizontalmente
+                marginTop: "4rem",
+              }}
+              wrapperClass=""
+              visible={true}
+            />
+          ) : (
+            <div className={styles.createBtn} onClick={handleCreate}>
+              <button>Create</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
