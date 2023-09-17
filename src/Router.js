@@ -8,6 +8,7 @@ import ProductList from './Views/ProductList/ProductList';
 import AddProduct from './Views/AddProduct/addProduct';
 import CategoriesList from './Views/CategoriesList/CategoriesList';
 import AddCategory from './Views/AddCategorie/AddCategorie';
+import OrdersList from './Views/Orders/Order';
 // import ColorsList from './Views/Colors/ColorsList/ColorsList';
 // import BrandsList from './Views/Brands/BrandsList/BrandsList';
 
@@ -26,9 +27,10 @@ const Router = () => {
           <Route exact path="productList" element={<ProductList/>}/>
           <Route exact path="categoriesList" element={<CategoriesList/>}/>
           <Route exact path="addCategory" element={<AddCategory/>}/>
+          <Route exact path="ordersList" element={<OrdersList/>}/>
           {/* 
           <Route exact path="colorsList" element={<ColorsList/>}/>
-          <Route exact path="brandsList" element={<BrandsList/>}/> */}
+           */}
           <Route exact path="addProduct" element={<AddProduct/>}/>
         </Route>
       </Routes>
