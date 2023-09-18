@@ -7,6 +7,7 @@ import SingleUser from './Views/SingleUser/SingleUser';
 import ProductList from './Views/ProductList/ProductList';
 import AddProduct from './Views/AddProduct/addProduct';
 import AddBrand from './Views/AddBrand/addBrand';
+import BrandList from './Views/BrandList/BrandList';
 
 const Router = () => {
   return ( 
@@ -22,6 +23,7 @@ const Router = () => {
           <Route exact path="productList" element={<ProductList/>}/>
           <Route exact path="addProduct" element={<AddProduct/>}/>
           <Route exact path="addBrand" element = {<AddBrand/>} />
+          <Route exact path ="brandlist" element = {<BrandList/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
