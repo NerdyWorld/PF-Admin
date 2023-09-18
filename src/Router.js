@@ -11,6 +11,7 @@ import AddCategory from "./Views/AddCategorie/AddCategorie";
 import ColorsList from "./Views/Colors/ColorsList/ColorsList";
 // import BrandsList from "./Views/Brands/BrandsList/BrandsList";
 import AddColor from "./Views/Colors/AddColor/AddColor";
+import OrdersList from './Views/Orders/Order';
 
 const Router = () => {
   return (
@@ -30,6 +31,7 @@ const Router = () => {
           {/* <Route exact path="brandsList" element={<BrandsList />} /> */}
           <Route exact path="addProduct" element={<AddProduct />} />
           <Route exact path="addColor" element={<AddColor />} />
+          <Route exact path="ordersList" element={<OrdersList/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
