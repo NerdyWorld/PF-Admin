@@ -25,6 +25,10 @@ const ColorList = () => {
   const refToast = useRef();
 
   useEffect(() => {
+    dispatch(getAllColors());
+  }, []);
+
+  useEffect(() => {
     if (message === "Delete color success") {
       refToast.current.show({
         life: 3000,
@@ -40,7 +44,6 @@ const ColorList = () => {
         detail: "Failed to delete color",
       });
     }
-    dispatch(getAllColors());
   }, [isError, isSuccess, message]);
 
   const handleDelete = (colorId) => {
