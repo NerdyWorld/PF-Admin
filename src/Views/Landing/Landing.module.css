@@ -1,0 +1,38 @@
+/* Landing.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Cambia el color de fondo según tus preferencias */
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: #333; /* Cambia el color de texto según tus preferencias */
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #666; /* Cambia el color de texto según tus preferencias */
+}
+
+.containerLogin {
+  margin-top: 24px;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff; /* Cambia el color de texto según tus preferencias */
+  background-color: #007bff; /* Cambia el color de fondo del botón según tus preferencias */
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3; /* Cambia el color de fondo del botón al pasar el cursor por encima */
+  }
+}

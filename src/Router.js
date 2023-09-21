@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Layout/Layout";
-import Login from "./Views/Login/Login";
 import Users from "./Views/Users/Users";
 import SingleUser from "./Views/SingleUser/SingleUser";
 import ProductList from "./Views/ProductList/ProductList";
@@ -13,13 +12,14 @@ import AddColor from "./Views/Colors/AddColor/AddColor";
 import OrdersList from "./Views/Orders/Order";
 import AddBrand from "./Views/AddBrand/addBrand";
 import BrandList from "./Views/BrandList/BrandList";
+import Landing from "./Views/Landing/Landing";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* OUTSIDE LAYOUT */}
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Landing />} />
 
         {/* INSIDE LAYOUT */}
         <Route path="/admin" element={<Layout />}>
