@@ -7,10 +7,12 @@ import { FcFullTrash, FcAbout } from 'react-icons/fc';
 import { getAllOrders, updateOrder, deleteOrder } from '../../Features/Orders/ordersSlice';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import { getAllUsers } from '../../Features/Users/userSlice';
 
 const OrdersList = () => {
   const state = useSelector((state) => state);
-  const { orders, isError } = state.orders;
+  const { orders} = state.orders;
+  const { users } = state.users;
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
@@ -37,6 +39,11 @@ const OrdersList = () => {
     clearFilters();
     setSearchText('');
   };
+
+  function findUsernameById(idToFind) {
+    const foundUser = users.find(user => user.id == idToFind);
+    return foundUser ? foundUser.userName : null;
+  }
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -97,6 +104,7 @@ const OrdersList = () => {
 
   useEffect(() => {
     dispatch(getAllOrders());
+    dispatch(getAllUsers())
   }, []);
 
   const handleUpdateOrderStatus = async (orderId, newStatus) => {
@@ -232,6 +240,7 @@ const OrdersList = () => {
           <Select.Option value="Ordered">Ordered</Select.Option>
           <Select.Option value="Shipped">Shipped</Select.Option>
           <Select.Option value="Canceled">Canceled</Select.Option>
+          <Select.Option value="Delivered">Delivered</Select.Option>
         </Select>
       ),
     },
@@ -254,15 +263,18 @@ const OrdersList = () => {
     },
   ];
 
-  const data = orders.map((order) => ({
-    key: order.id,
-    id: order.id,
-    orderStatus: order.orderStatus,
-    items: order.items.length,
-    createdAt: order.createdAt,
-    totalPrice: order.totalPrice,
-    fullname: 'cliente1',
-  }));
+  const data = orders.map((order) => {
+    const username = findUsernameById(order.belongsTo); 
+    return {
+      key: order.id,
+      id: order.id,
+      orderStatus: order.orderStatus,
+      items: order.items.length,
+      createdAt: order.createdAt,
+      totalPrice: order.totalPrice,
+      fullname: username || 'Usuario no encontrado', 
+    };
+  });
 
   return (
     <div>
