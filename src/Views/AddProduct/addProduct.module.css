@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -7,26 +7,26 @@
   padding: 0.5rem 2rem;
 }
 
-.wrapper h3{
+.wrapper h3 {
   font-family: Gucci;
   letter-spacing: 1px;
   margin-bottom: 2.5rem;
 }
 
-.form{
+.form {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 }
 
-.formContainer{
+.formContainer {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
-.textarea{
+.textarea {
   width: 100%;
   border: 0.7px solid rgb(174, 173, 173);
   border-radius: 0.3rem;
@@ -34,37 +34,35 @@
   padding: 2rem 1rem;
 }
 
-.label{
+.label {
   font-size: 12px;
   color: #777777;
   margin-top: -8px;
 }
 
-.wrapper table thead{
+.wrapper table thead {
   font-family: Gucci;
   letter-spacing: 0.5px;
 }
 
-.wrapper table tbody{
+.wrapper table tbody {
   font-family: Dolce;
   font-size: 12px;
   letter-spacing: 1px;
 }
 
-.color{
+.color {
   margin-top: 1rem;
   background-color: rgb(241, 239, 239);
   padding: 0.5rem;
   width: 100%;
 }
 
-
-.optional{
+.optional {
   font-size: 11px;
 }
 
-
-.createBtn{
+.createBtn {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -72,7 +70,7 @@
   margin-top: 4rem;
 }
 
-.createBtn button{
+.createBtn button {
   width: 50%;
   border: none;
   background-color: #1f1f1f;
@@ -84,8 +82,7 @@
   cursor: pointer;
 }
 
-
-.formRequired{
+.formRequired {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,13 +90,13 @@
   margin-bottom: 0.8rem;
 }
 
-.formCheckbox{
+.formCheckbox {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.formCheckbox label{
+.formCheckbox label {
   font-size: 11px;
   color: #777777;
   letter-spacing: 0.5px;

@@ -1,17 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'
-import { store } from './Store/Store';
-import { GlobalProvider } from './Context/globalContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { store } from "./Store/Store";
+import { GlobalProvider } from "./Context/globalContext";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <GlobalProvider>
-      <App />
+      <GoogleOAuthProvider clientId="210798772682-fdg2e07n7b12fa7hbm0578ni793fca7e.apps.googleusercontent.com">
+        <App />
+      </GoogleOAuthProvider>
     </GlobalProvider>
   </Provider>
 );

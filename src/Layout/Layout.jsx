@@ -42,7 +42,7 @@ const items = [
     getItem('Add Color', 'addColor'),
   ]),
   getItem('Brands', 'sub7', <FcViewDetails size={20} />, [
-    getItem('Brands List', 'brandsList'),
+    getItem('Brands List', 'brandList'),
     getItem('Add Brand', 'addBrand')
   ]),
 ];

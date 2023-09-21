@@ -1,0 +1,31 @@
+.wrapper{
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  font-family: Dolce;
+  padding: 0.5rem 2rem;
+}
+
+.wrapper h3{
+  font-family: Gucci;
+  letter-spacing: 1px;
+  margin-bottom: 2.5rem;
+}
+
+.wrapper table thead th:first-child{
+  text-align: left !important;
+}
+
+.wrapper table thead th{
+  text-align: center !important;
+  font-family: Gucci;
+  letter-spacing: 0.5px;
+}
+
+.wrapper table tbody td{
+  font-family: Dolce;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
