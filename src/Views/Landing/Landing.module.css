@@ -4,19 +4,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f0f0f0; /* Cambia el color de fondo según tus preferencias */
+  min-height: 100vh;
+  background-image: url("https://nerdy-my-ecommerce.s3.us-east-2.amazonaws.com/FrontAssets/background.jpg");
+  background-size: cover;
+  width: 100%;
 }
 
 .title {
   font-size: 36px;
   margin-bottom: 16px;
-  color: #333; /* Cambia el color de texto según tus preferencias */
+  color: #333;
 }
 
 .subtitle {
   font-size: 18px;
-  color: #666; /* Cambia el color de texto según tus preferencias */
+  color: #666;
 }
 
 .containerLogin {
@@ -26,12 +28,12 @@
 .button {
   cursor: pointer;
   font-size: 16px;
-  color: #fff; /* Cambia el color de texto según tus preferencias */
-  background-color: #007bff; /* Cambia el color de fondo del botón según tus preferencias */
+  color: #fff;
+  background-color: #007bff;
   padding: 8px 16px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-
+  margin-top: 5vh;
   &:hover {
     background-color: #0056b3; /* Cambia el color de fondo del botón al pasar el cursor por encima */
   }

@@ -1,28 +1,28 @@
-*{
+* {
   margin: 0;
 }
 
-
 @font-face {
   font-family: "Gucci";
-  src: local("Gucci"),
-  url("./fonts/gucci.woff") format("woff");
+  src: local("Gucci"), url("./fonts/gucci.woff") format("woff");
 }
 
 @font-face {
   font-family: "Dolce";
-  src: local("Dolce"),
-  url("./fonts/FuturaStd-Medium.woff2") format("woff2");
+  src: local("Dolce"), url("./fonts/FuturaStd-Medium.woff2") format("woff2");
 }
-
 
 @font-face {
   font-family: "FOG";
-  src: local("FOG"),
-  url("./fonts/HelveticaNeueLTPro-Cn.woff2") format("woff2");
+  src: local("FOG"), url("./fonts/HelveticaNeueLTPro-Cn.woff2") format("woff2");
+}
+@font-face {
+  font-family: "LVRegular";
+  src: local("LVRegular"),
+    url("./fonts/lv/LouisVuitton-Regular.woff2") format("woff2");
 }
 
-.mainTitle{
+.mainTitle {
   font-family: FOG;
   letter-spacing: 4px;
   font-size: 16px;
@@ -30,108 +30,105 @@
   padding: 0.7rem 0rem;
 }
 
-.userData{
+.userData {
   font-size: 11px;
   letter-spacing: 1px;
 }
 
-.userDropdown a{
+.userDropdown a {
   font-size: 11px !important;
   letter-spacing: 1px;
 }
 
-
-.ant-table-tbody tr td{
+.ant-table-tbody tr td {
   cursor: default;
 }
-.ant-table-thead tr th{
+.ant-table-thead tr th {
   cursor: default;
   background-color: #1f1f1f !important;
   color: white !important;
 }
 
-.ant-table-column-sorter{
+.ant-table-column-sorter {
   color: whitesmoke !important;
 }
 
-
-
-
-.userDelete, .userBan, .userActivate, .userWishlist, .userCart{
+.userDelete,
+.userBan,
+.userActivate,
+.userWishlist,
+.userCart {
   transition: transform 0.4s ease;
   cursor: pointer;
 }
 
-
-.userDelete:hover, .userBan:hover, .userActivate:hover, .userWishlist:hover, .userCart:hover{
+.userDelete:hover,
+.userBan:hover,
+.userActivate:hover,
+.userWishlist:hover,
+.userCart:hover {
   transform: scale(1.06);
 }
 
-
-.ant-table-filter-trigger{
+.ant-table-filter-trigger {
   color: white !important;
 }
-.userStatusSpan{
+.userStatusSpan {
   display: flex;
   align-items: center;
   gap: 3px;
 }
 
-.userStatusSpan span.online{
+.userStatusSpan span.online {
   width: 8px !important;
   height: 8px !important;
   background-color: green !important;
   border-radius: 50% !important;
 }
 
-.userStatusSpan span.offline{
+.userStatusSpan span.offline {
   width: 8px !important;
   height: 8px !important;
   background-color: rgb(201, 54, 54) !important;
   border-radius: 50% !important;
 }
 
-.ant-table-wrapper td.ant-table-column-sort{
+.ant-table-wrapper td.ant-table-column-sort {
   background: white;
 }
 
-
-.userInfo{
+.userInfo {
   transition: transform 0.4s ease;
 }
 
-.userInfo:hover{
+.userInfo:hover {
   transform: scale(1.05);
 }
 
-.userDetails .ant-pagination{
+.userDetails .ant-pagination {
   display: none;
 }
 
-
-
 /* SWEET ALERT CUSTOM TOAST */
 
-.swalTitle{
+.swalTitle {
   color: white;
   font-family: Gucci;
   letter-spacing: 0.5px;
   cursor: default;
 }
 
-.swalHtml{
+.swalHtml {
   font-family: Gucci;
   line-height: 30px !important;
   cursor: default;
 }
 
-
-.swalHtml b{
+.swalHtml b {
   text-decoration: underline;
 }
 
-
-.confirmSwalCheckout{
+.confirmSwalCheckout {
   background-color: rgb(215, 76, 76);
   color: white;
   border: none;
@@ -142,8 +139,7 @@
   margin-right: 1rem;
 }
 
-
-.denySwalCheckout{
+.denySwalCheckout {
   background-color: whitesmoke;
   border: none;
   font-family: Gucci;
@@ -152,82 +148,84 @@
   letter-spacing: 0.5px;
 }
 
-
 /* PROD COLOR MODAL */
 
-
-
-.carousel-control-prev{
+.carousel-control-prev {
   height: 20% !important;
   top: 50%;
   transform: translateY(-50%);
 }
 
-
-.carousel-control-next{
+.carousel-control-next {
   height: 20% !important;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.carousel-control-next-icon{
+.carousel-control-next-icon {
   background-image: url("https://nerdy-my-ecommerce.s3.us-east-2.amazonaws.com/FrontAssets/Nacho/rightArrow") !important;
 }
 
-.carousel-control-prev-icon{
+.carousel-control-prev-icon {
   background-image: url("https://nerdy-my-ecommerce.s3.us-east-2.amazonaws.com/FrontAssets/Nacho/left-svgrepo-com.png") !important;
 }
 
-
-.prodColorModal .carousel-item{
+.prodColorModal .carousel-item {
   max-height: 352px !important;
 }
 
-.prodColorModal .carousel-item.dolce{
+.prodColorModal .carousel-item.dolce {
   max-height: 380px !important;
 }
 
-
-
-
 .form-select,
-.form-control{
+.form-control {
   box-shadow: none !important;
   border: 1px solid lightgray !important;
   font-size: 13px !important;
   letter-spacing: 1px;
 }
 
-
-summary{
+summary {
   font-family: Gucci;
   font-size: 13px;
   letter-spacing: 1px;
 }
 
-
-
 /* PRIME REACT TOAST */
-.p-toast-message{
-  background-color: rgb(0, 0, 0, 0.50) !important;
+.p-toast-message {
+  background-color: rgb(0, 0, 0, 0.5) !important;
   color: white !important;
   font-family: Gucci;
   border-left: 6px solid #ffffff4e !important;
 }
 
-.p-toast-icon-close{
+.p-toast-icon-close {
   background-color: rgba(0, 0, 0, 0.251) !important;
   color: white !important;
   width: 20px !important;
   height: 20px !important;
 }
 
-.p-toast-icon-close svg{
+.p-toast-icon-close svg {
   width: 10px !important;
   height: 10px !important;
 }
 
-.p-toast-message.p-toast-message-success .p-toast-message-icon{
+.p-toast-message.p-toast-message-success .p-toast-message-icon {
   width: 20px !important;
   color: rgb(219, 219, 219) !important;
+}
+
+/* Landing */
+.rvl-landing {
+  margin-top: 10px;
+  color: #000;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase;
+  margin-bottom: 0 !important;
+  font-family: "futuraStd";
+  padding: 5px;
 }

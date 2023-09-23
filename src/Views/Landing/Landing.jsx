@@ -12,7 +12,7 @@ const Landing = () => {
   return (
     <div className={styles.container}>
       <LoginModalN />
-      <h1 className={styles.tittle}>Rivelle</h1>
+      <h1 className="rvl-landing">Rivélle</h1>
       <p className={styles.subtittle}>Admin</p>
       {showLogin && (
         <>
