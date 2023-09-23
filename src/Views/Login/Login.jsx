@@ -29,7 +29,7 @@ const LoginModalN = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state);
-  const { message, user } = state.users;
+  const { message, user, userx } = state.users;
   console.log(state);
 
   // CONTEXT API
@@ -105,24 +105,44 @@ const LoginModalN = () => {
 
   useEffect(() => {
     // GOOGLE AUTH RESPONSE
-
-    if (message === "Not an admin") {
+    if (
+      message === "Account already associated with Google Email" ||
+      message ===
+        "There is an account associated with your GitHub email, please try logging in manually!" ||
+      message ===
+        "This email is associated with a Google account, please try logging in with Google" ||
+      message ===
+        "This email is associated with a GitHub account, please try logging in with GitHub"
+    ) {
       refToast.current.show({
         life: 3000,
         severity: "info",
         summary: "We're sorry",
-        detail: "Not an admin",
-      });
-    }
-
-    if (message === "Account already associated with Google Email") {
-      refToast.current.show({
-        life: 3000,
-        severity: "info",
-        summary: "We're sorry",
-        detail: "There is an account associated with your Google email",
+        detail: message,
       });
       dispatch(clearUserMessage());
+    }
+    if (message === "Google user logged" && !userx.admin) {
+      if (user && user.encodedId) {
+        localStorage.setItem(
+          "nerdyUser",
+          JSON.stringify({ userId: user.encodedId })
+        );
+      }
+      setLogged({
+        userId: user.encodedId,
+      });
+      refToast.current.show({
+        life: 3000,
+        severity: "info",
+        summary: "We're sorry",
+        detail: "Not an admin but welcome anyway",
+      });
+      setTimeout(() => {
+        dispatch(clearUserMessage());
+        setShowLoginModal(false);
+        navigate("/admin");
+      }, 3000);
     }
     if (message === "Google user logged") {
       // Setear LS con userID encriptado
@@ -150,22 +170,21 @@ const LoginModalN = () => {
         dispatch(clearUserMessage());
         setShowLoginModal(false);
         navigate("/admin");
-      }, 100);
+      }, 3000);
     }
-
-    // GITHUB AUTH RESPONSE
     if (
-      message ===
-      "There is an account associated with your GitHub email, please try logging in manually!"
+      message === "Google user created" ||
+      message === "Github user created"
     ) {
       refToast.current.show({
-        life: 3000,
-        severity: "info",
-        summary: "We're sorry",
-        detail: message,
+        sticky: 2000,
+        severity: "success",
+        summary: "Welcome",
+        detail: `User created you can try now to login`,
       });
-      dispatch(clearUserMessage());
-      navigate("/");
+      setTimeout(() => {
+        setShowLoginModal(false);
+      }, 1000);
     }
     if (message === "Github user logged") {
       // Setear LS con userID encriptado
@@ -193,34 +212,9 @@ const LoginModalN = () => {
         dispatch(clearUserMessage());
         setShowLoginModal(false);
         navigate("/admin");
-      }, 2100);
+      }, 3000);
     }
 
-    // LOGIN MANUALLY RESPONSE
-    if (
-      message ===
-      "This email is associated with a Google account, please try logging in with Google"
-    ) {
-      refToast.current.show({
-        life: 3000,
-        severity: "info",
-        summary: "We're sorry",
-        detail: message,
-      });
-      dispatch(clearUserMessage());
-    }
-    if (
-      message ===
-      "This email is associated with a GitHub account, please try logging in with GitHub"
-    ) {
-      refToast.current.show({
-        life: 3000,
-        severity: "info",
-        summary: "We're sorry",
-        detail: message,
-      });
-      dispatch(clearUserMessage());
-    }
     if (message === "Email Incorrect") {
       refToast.current.show({
         life: 3000,
@@ -276,7 +270,7 @@ const LoginModalN = () => {
         navigate("/admin");
       }, 100);
     }
-  }, [dispatch, message, navigate, setLogged, setShowLoginModal, user]);
+  }, [dispatch, message, navigate, setLogged, setShowLoginModal, user, userx]);
 
   return (
     <article

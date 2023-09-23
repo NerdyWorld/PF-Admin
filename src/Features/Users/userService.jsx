@@ -2,24 +2,19 @@ import axios from "axios";
 import { base_url } from "../../Utils/utilities";
 
 const loginUser = async (user) => {
-  const response = await axios.post(`${base_url}/user/admin/login`, user);
+  const response = await axios.post(`${base_url}/user/login`, user);
 
   return response.data;
 };
 
 const googleLogin = async (googleUser) => {
-  const response = await axios.post(
-    `${base_url}/user/googleAuthAdmin`,
-    googleUser
-  );
+  const response = await axios.post(`${base_url}/user/googleAuth`, googleUser);
 
   return response.data;
 };
 
 const githubAuth = async (gitCode) => {
-  const response = await axios.post(
-    `${base_url}/user/githubAuthAdmin/${gitCode}`
-  );
+  const response = await axios.post(`${base_url}/user/githubAuth/${gitCode}`);
 
   return response.data;
 };

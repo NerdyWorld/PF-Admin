@@ -128,9 +128,8 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        state.message = "Not an admin";
+        state.message = action.payload.msg;
         state.userx = null;
-        console.log(action);
       })
       //login github
       .addCase(githubAuth.pending, (state, action) => {
@@ -147,8 +146,7 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        state.message =
-          "There is an account associated with your GitHub email, please try logging in manually!";
+        state.message = action.payload.msg;
         state.userx = null;
       })
       // GET ALL USERS
