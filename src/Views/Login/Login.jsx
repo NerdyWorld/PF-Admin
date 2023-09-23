@@ -144,7 +144,7 @@ const LoginModalN = () => {
         navigate("/admin");
       }, 3000);
     }
-    if (message === "Google user logged") {
+    if (message === "Google user logged" && userx.admin) {
       // Setear LS con userID encriptado
       if (user && user.encodedId) {
         localStorage.setItem(
