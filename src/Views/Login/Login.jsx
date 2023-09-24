@@ -30,7 +30,6 @@ const LoginModalN = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state);
   const { message, user, userx } = state.users;
-  console.log(state);
 
   // CONTEXT API
   const globalContext = useContext(GlobalContext);
@@ -123,19 +122,14 @@ const LoginModalN = () => {
       dispatch(clearUserMessage());
     }
     if (message === "Google user logged" && !userx.admin) {
-      if (user && user.encodedId) {
-        localStorage.setItem(
-          "nerdyUser",
-          JSON.stringify({ userId: user.encodedId })
-        );
+      if (userx && userx.encodedId) {
+        localStorage.setItem("nerdyUser", JSON.stringify({ user: userx }));
       }
-      setLogged({
-        userId: user.encodedId,
-      });
+      setLogged(true);
       refToast.current.show({
         life: 3000,
         severity: "info",
-        summary: "We're sorry",
+        summary: "Hi!",
         detail: "Not an admin but welcome anyway",
       });
       setTimeout(() => {
@@ -146,18 +140,11 @@ const LoginModalN = () => {
     }
     if (message === "Google user logged" && userx.admin) {
       // Setear LS con userID encriptado
-      if (user && user.encodedId) {
-        localStorage.setItem(
-          "nerdyUser",
-          JSON.stringify({ userId: user.encodedId })
-        );
+      if (userx && userx.encodedId) {
+        localStorage.setItem("nerdyUser", JSON.stringify({ user: userx }));
       }
-
       // setLogged to allow functionalities
-      setLogged({
-        userId: user.encodedId,
-      });
-
+      setLogged(true);
       refToast.current.show({
         sticky: 2000,
         severity: "success",
@@ -188,17 +175,12 @@ const LoginModalN = () => {
     }
     if (message === "Github user logged") {
       // Setear LS con userID encriptado
-      if (user && user.encodedId) {
-        localStorage.setItem(
-          "nerdyUser",
-          JSON.stringify({ userId: user.encodedId })
-        );
+      if (userx && userx.encodedId) {
+        localStorage.setItem("nerdyUser", JSON.stringify({ user: userx }));
       }
 
       // setLogged to allow functionalities
-      setLogged({
-        userId: user.encodedId,
-      });
+      setLogged(true);
 
       refToast.current.show({
         sticky: 2000,
@@ -244,17 +226,12 @@ const LoginModalN = () => {
     }
     if (message === "User logged") {
       // Setear LS con userID encriptado
-      if (user && user.encodedId) {
-        localStorage.setItem(
-          "nerdyUser",
-          JSON.stringify({ userId: user.encodedId })
-        );
+      if (userx && userx.encodedId) {
+        localStorage.setItem("nerdyUser", JSON.stringify({ user: userx }));
       }
 
       // setLogged to allow functionalities
-      setLogged({
-        userId: user.encodedId,
-      });
+      setLogged(true);
 
       refToast.current.show({
         sticky: 2000,

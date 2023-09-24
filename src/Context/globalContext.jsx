@@ -7,7 +7,9 @@ export const GlobalProvider = ({ children }) => {
   const [showUserCartModal, setShowUserCartModal] = useState(false);
   const [showColorModal, setShowColorModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+
   const [logged, setLogged] = useState(false);
+
   const data = {
     showUserFavsModal,
     logged,
